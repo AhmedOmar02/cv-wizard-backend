@@ -4,6 +4,12 @@ import logger from './loggers/appLogger';
 
 dotenv.config({ path: './config/.env', quiet: true });
 
-const PORT: number = Number(process.env.PORT) || 80;
+const PORT: number = Number(process.env.PORT) || 3003;
 
 app.listen(PORT, () => logger.info(`Server is listening on port ${PORT}`));
+
+
+
+
+
+
