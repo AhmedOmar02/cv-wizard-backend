@@ -19,6 +19,7 @@ app.use(cors({
 }));
 app.use(helmet());
 
+
 app.use(notFoundEndpoint); // handle requests to endpoints that are not implemented
 
 // global error handler
