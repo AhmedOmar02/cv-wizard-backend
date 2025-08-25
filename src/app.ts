@@ -1,10 +1,13 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import authRouter from './routes/authRouter'; 
+import authRouter from './routes/authRouter';
 import globalErrorHandler from './middlewares/globalErrorHandler';
+import httpLog from './middlewares/httpLog';
 
 const app = express();
+
+app.use(httpLog);
 
 // Middlewares
 app.use(cors());
