@@ -15,13 +15,10 @@ export const registerSchema = Joi.object({
       'string.pattern.name': 'Password must contain at least one {#name}',
       'any.required': 'Password is required',
     }),
-  firstName: Joi.string().max(50).optional(),
-  lastName: Joi.string().max(50).optional(),
+  firstName: Joi.string().max(50).required(),
+  lastName: Joi.string().max(50).required(),
   phoneNumber: Joi.string().max(20).optional(),
   city: Joi.string().max(50).optional(),
   country: Joi.string().max(50).optional(),
   linkedinUrl: Joi.string().uri().optional(),
-  role: Joi.string()
-    .valid('regular', 'admin') // extend if you want more roles
-    .default('regular'),
 });
