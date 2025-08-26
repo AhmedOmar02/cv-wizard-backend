@@ -5,7 +5,7 @@ import { catchAsync } from '../utils/catchAsync';
 import APIError from '../classes/APIError';
 import prisma from '../db/client';
 import { SUCCESS } from '../constants/responseConstants';
-import { Role } from '@prisma/client';
+import { Role } from '@prisma/client'
 
 const { REGULAR } = Role;
 

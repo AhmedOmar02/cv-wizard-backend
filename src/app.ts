@@ -4,11 +4,14 @@ import cors from 'cors';
 import authRouter from './routes/authRouter';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import httpLog from './middlewares/httpLog';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './docs/swagger';
 
 const app = express();
 
 app.use(httpLog);
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Middlewares
 app.use(cors());
 app.use(express.json());
