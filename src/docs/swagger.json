@@ -14,14 +14,21 @@
     "/auth/register": {
       "post": {
         "summary": "Register a new user",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["email", "password", "firstName", "lastName"],
+                "required": [
+                  "email",
+                  "password",
+                  "firstName",
+                  "lastName"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -109,8 +116,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "fail" },
-                    "message": { "type": "string", "example": "Method not allowed." }
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Method not allowed."
+                    }
                   }
                 }
               }
@@ -122,14 +135,18 @@
     "/auth/login": {
       "post": {
         "summary": "Login a user",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["password"],
+                "required": [
+                  "password"
+                ],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -157,9 +174,18 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "success" },
-                    "message": { "type": "string", "example": "Successfully logged in." },
-                    "token": { "type": "string", "example": "eyJhbGciOi..." }
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in."
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOi..."
+                    }
                   }
                 }
               }
@@ -172,8 +198,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "fail" },
-                    "message": { "type": "string", "example": "Invalid id/email or password" }
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid id/email or password"
+                    }
                   }
                 }
               }
@@ -186,8 +218,203 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "fail" },
-                    "message": { "type": "string", "example": "Method not allowed." }
+                    "status": {
+                      "type": "string",
+                      "example": "fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Method not allowed."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "patch": {
+        "summary": "Update authenticated user profile",
+        "description": "Allows the authenticated user to update their profile information. At least one attribute must be provided.",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "updateUserProfile",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "Doe"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "+1234567890"
+                  },
+                  "city": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "New York"
+                  },
+                  "country": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "USA"
+                  },
+                  "linkedinUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "example": "https://www.linkedin.com/in/johndoe"
+                  }
+                },
+                "example": {
+                  "firstName": "John",
+                  "lastName": "Doe",
+                  "city": "New York"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User has been updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User has been updated successfully"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "user_123"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "johndoe@gmail.com"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "John"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "Doe"
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "example": "+1234567890"
+                        },
+                        "city": {
+                          "type": "string",
+                          "example": "New York"
+                        },
+                        "country": {
+                          "type": "string",
+                          "example": "USA"
+                        },
+                        "linkedinUrl": {
+                          "type": "string",
+                          "format": "uri",
+                          "example": "https://www.linkedin.com/in/johndoe"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2025-08-01T12:34:56.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error - request body is invalid or empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "At least 1 attribute is required to update"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized, No token provided"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Something went wrong"
+                    }
                   }
                 }
               }
