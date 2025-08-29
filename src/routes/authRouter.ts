@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import requestValidator from '../middlewares/requestVaildator';
-import { registerSchema } from '../validators/validate.auth';
+import { registerSchema, loginSchema } from '../validators/validate.auth';
 import { notAllowedMethod } from '../middlewares/notAllowedHandler';
 import { login, register } from '../controllers/authController';
 
@@ -15,7 +15,8 @@ authRouter.route('/register')
 
 authRouter.route('/login')
   .post(
-    login
-  )
+    requestValidator({ bodySchema: loginSchema }),
+    login,
+  );
 
 export default authRouter;
