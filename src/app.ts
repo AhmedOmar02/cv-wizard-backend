@@ -4,14 +4,15 @@ import cors from 'cors';
 import authRouter from './routes/authRouter';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import httpLog from './middlewares/httpLog';
-import swaggerUi from 'swagger-ui-express';
-import { swaggerSpec } from './docs/swagger';
+import swaggerUI from 'swagger-ui-express';
+import docs from './docs/swagger.json';
 
 const app = express();
 
 app.use(httpLog);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
+
 // Middlewares
 app.use(cors({
   origin: 'http://localhost:5173',
