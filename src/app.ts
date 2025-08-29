@@ -6,6 +6,7 @@ import globalErrorHandler from './middlewares/globalErrorHandler';
 import httpLog from './middlewares/httpLog';
 import swaggerUI from 'swagger-ui-express';
 import docs from './docs/swagger.json';
+import userRouter from './routes/userRouter';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
 
 
 app.use(globalErrorHandler);
