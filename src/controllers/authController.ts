@@ -67,7 +67,7 @@ export const register = catchAsync(async(req: Request, res: Response, next: Next
   });
 });
 
-export const login = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+export const login = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
   const { id, email, password } = req.body;
 
   const user = await prisma.user.findFirst({
@@ -92,7 +92,7 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
       iss: process.env.JWT_ISS,
     },
     process.env.JWT_SECRET as string,
-    { expiresIn: '1d' }
+    { expiresIn: '1d' },
   );
 
   res.cookie('token', token, {

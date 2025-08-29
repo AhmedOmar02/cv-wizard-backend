@@ -22,3 +22,9 @@ export const registerSchema = Joi.object({
   country: Joi.string().max(50).optional(),
   linkedinUrl: Joi.string().uri().optional(),
 });
+
+export const loginSchema = Joi.object({
+  id: Joi.string(),
+  email: Joi.string().email(),
+  password: Joi.string().required(),
+}).xor('id', 'email');
